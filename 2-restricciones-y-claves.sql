@@ -31,7 +31,7 @@ CREATE TABLE empresa (
     rut VARCHAR2(10) PRIMARY KEY,
     nombre VARCHAR2(200) NOT NULL  -- Esta columna no puede ser nula
 );
-
+--
 -- Ejemplo de inserción válida
 INSERT INTO empresa (rut, nombre) VALUES ('123456789', 'Cecinas del Sur');
 
@@ -49,11 +49,7 @@ INSERT INTO empresa (rut, nombre) VALUES ('987654321', NULL);
 -- La restricción UNIQUE asegura que todos los valores en una columna sean únicos.
 -- Se aplica en la columna fono de la tabla cliente.
 
-CREATE TABLE cliente (
-    rut VARCHAR2(10) PRIMARY KEY,
-    nombre VARCHAR2(120),
-    fono VARCHAR2(20) UNIQUE  -- Esta columna debe contener valores únicos
-);
+--inse
 
 -- Ejemplo de inserción válida
 INSERT INTO cliente (rut, nombre, fono) VALUES ('987654321', 'Supermercado ABC', '22223333');
@@ -160,33 +156,6 @@ SELECT * FROM inventario;
    y el segundo registro tiene un stock de 1000 (valor especificado). */
 
 
-/*******************************************************
- *                                                     *
- *   CONFIGURACIÓN DE ACTUALIZACIÓN EN CASCADA         *
- *                                                     *
- *******************************************************/
--- Eliminamos la restricción existente en la tabla produccion
-ALTER TABLE produccion DROP CONSTRAINT produccion_plantaprod_FK;
-
--- Añadimos una nueva restricción con ON UPDATE CASCADE
-ALTER TABLE produccion 
-ADD CONSTRAINT produccion_plantaprod_FK 
-FOREIGN KEY (plantaprod_id) 
-REFERENCES planta_prod(id) 
-ON UPDATE CASCADE;
-
--- Ejemplo de actualización en cascada:
--- Actualizamos el id de una planta de producción en la tabla planta_prod
-UPDATE planta_prod SET id = 99 WHERE id = 1;
-
--- Las filas en la tabla produccion que tenían plantaprod_id = 1
--- ahora tendrán plantaprod_id = 99.
-
-SELECT * FROM produccion WHERE plantaprod_id = 99;
-/* El resultado mostrará que las filas han sido actualizadas
-   automáticamente para reflejar el nuevo id de la planta de producción. */
-
-  
 /*******************************************************
  *                                                     *
  *   CONFIGURACIÓN DE BORRADO EN CASCADA               *
