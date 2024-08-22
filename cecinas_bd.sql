@@ -36,7 +36,7 @@
  *******************************************************/
 -- Eliminar las tablas hijas primero para evitar problemas de integridad referencial
 
-/*DROP TABLE detCompra CASCADE CONSTRAINTS;
+DROP TABLE detCompra CASCADE CONSTRAINTS;
 DROP TABLE compra CASCADE CONSTRAINTS;
 DROP TABLE detVenta CASCADE CONSTRAINTS;
 DROP TABLE venta CASCADE CONSTRAINTS;
@@ -52,7 +52,7 @@ DROP TABLE maquinaria CASCADE CONSTRAINTS;
 DROP TABLE receta CASCADE CONSTRAINTS;
 DROP TABLE bodega CASCADE CONSTRAINTS;
 DROP TABLE inventario CASCADE CONSTRAINTS;
-DROP TABLE empresa CASCADE CONSTRAINTS;*/
+DROP TABLE empresa CASCADE CONSTRAINTS;
 
 /*******************************************************
  *                                                     *
@@ -87,7 +87,7 @@ CREATE TABLE receta (
 -- Tabla de Plantas de Producción
 CREATE TABLE planta_prod (
     id NUMBER(12) PRIMARY KEY, 
-    nombre VARCHAR2(20), 
+    nombre VARCHAR2(200), 
     maquinaria_id NUMBER(12),
     CONSTRAINT plantaProd_maquinaria_fk
         FOREIGN KEY (maquinaria_id)
@@ -260,6 +260,7 @@ INSERT INTO bodega (id, nombre) VALUES (3, 'Bodega de Productos Terminados');
 INSERT INTO bodega (id, nombre) VALUES (4, 'Bodega de Secado');
 INSERT INTO bodega (id, nombre) VALUES (5, 'Bodega de Materias Primas');
 
+
 -- Inserción de datos en la tabla receta
 INSERT INTO receta (id, nombre) VALUES (1, 'Receta Chorizo');
 INSERT INTO receta (id, nombre) VALUES (2, 'Receta Longaniza');
@@ -372,3 +373,4 @@ INSERT INTO detCompra (compraNumeroFacturaID, id, cantidad, descripcion, unitari
 VALUES (4, 4, 30, 'Especias', 1200, 4);
 INSERT INTO detCompra (compraNumeroFacturaID, id, cantidad, descripcion, unitario, inventarioID) 
 VALUES (5, 5, 60, 'Ajo', 1000, 5);
+
