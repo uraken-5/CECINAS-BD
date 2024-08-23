@@ -23,6 +23,12 @@
 -- El INNER JOIN devuelve las filas cuando hay al menos una coincidencia en ambas tablas.
 
 -- Ejemplo 1: Obtener todas las ventas con la información del cliente correspondiente.
+SELECT * from venta;
+SELECT * from cliente;
+
+SELECT V.NUMEROFACTURA, V.TOTAL, C.NOMBRE, C.GIRO FROM venta V INNER JOIN cliente C ON V.clienterut = C.rut;
+
+
 
 -- Ejemplo 2: Obtener los productos y sus tipos (solo productos que tienen un tipo asociado).
 
@@ -36,7 +42,9 @@
 -- Si no hay coincidencia, se devuelve NULL para las columnas de la tabla derecha.
 
 -- Ejemplo 1: Obtener todos los clientes y las ventas correspondientes (incluso si no han hecho ninguna compra).
-
+INSERT INTO cliente (rut, nombre, giro, direccion, ciudad, fono) VALUES ('54322232', 'Tiendita', 'Alimentos Buenos', 'Av. Central 203', 'Viña del Mar', '55557333');
+SELECT * from cliente C LEFT JOIN venta V ON C.rut = V.clienterut;
+SELECT * from cliente C RIGHT JOIN venta V ON C.rut = V.clienterut;
 -- Ejemplo 2: Obtener todos los productos y sus tipos (incluso si no tienen un tipo asociado).
 
 
@@ -49,6 +57,7 @@
 -- Si no hay coincidencia, se devuelve NULL para las columnas de la tabla izquierda.
 
 -- Ejemplo 1: Obtener todas las ventas y la información de los clientes correspondientes (incluso si no hay un cliente asociado).
+SELECT * from cliente C RIGHT JOIN venta V ON C.rut = V.clienterut;
 
 -- Ejemplo 2: Obtener todos los tipos de cecina y los productos correspondientes (incluso si no hay productos de un tipo).
 
@@ -62,6 +71,7 @@
 -- Las filas que no tienen coincidencia en cualquiera de las tablas mostrarán NULL en las columnas de la otra tabla.
 
 -- Ejemplo 1: Obtener todos los clientes y ventas, incluyendo aquellos que no tienen una relación directa.
+SELECT * from cliente C FULL OUTER JOIN venta V ON C.rut = V.clienterut;
 
 -- Ejemplo 2: Obtener todos los productos y tipos, incluyendo productos sin tipo y tipos sin productos.
 
@@ -75,4 +85,4 @@
 -- Es decir, combina todas las filas de la tabla izquierda con todas las filas de la tabla derecha.
 
 -- Ejemplo: Obtener todas las combinaciones posibles de clientes y productos.
-
+SELECT c.nombre, ce.nombre FROM cliente c CROSS JOIN cecina ce;
