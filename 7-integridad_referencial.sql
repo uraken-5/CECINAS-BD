@@ -24,7 +24,8 @@
 -- Intento de inserción de un registro en la tabla produccion
 -- usando un plantaprod_id que no existe en la tabla planta_prod.
 -- Esto producirá un error de integridad referencial.
-
+INSERT INTO produccion (plantaprod_id, id, fechaInicio, fechaTermino) 
+VALUES (99, 6, TO_DATE('2024-09-01', 'YYYY-MM-DD'), TO_DATE('2024-09-10', 'YYYY-MM-DD'));
 /* Error esperado: ORA-02291: integrity constraint violated - parent key not found */
 
 
@@ -37,7 +38,7 @@
 -- Intento de actualización de la clave primaria en la tabla planta_prod
 -- que tiene registros 'hijos' en la tabla produccion.
 -- Esto producirá un error de integridad referencial.
-
+UPDATE planta_prod SET id = 99 WHERE id = 1;
 /* Error esperado: ORA-02292: integrity constraint violated - child record found */
 
 
@@ -50,7 +51,7 @@
 -- Intento de actualización de un plantaprod_id en la tabla produccion
 -- a un valor que no existe en la tabla planta_prod.
 -- Esto producirá un error de integridad referencial.
-
+UPDATE produccion SET plantaprod_id = 99 WHERE id = 1;
 /* Error esperado: ORA-02291: integrity constraint violated - parent key not found */
 
 
@@ -62,6 +63,6 @@
 -- Intento de eliminación de un registro en la tabla planta_prod
 -- que tiene registros 'hijos' en la tabla produccion.
 -- Esto producirá un error de integridad referencial.
-
+DELETE FROM planta_prod WHERE id = 2;
 /* Error esperado: ORA-02292: integrity constraint violated - child record found */
 
